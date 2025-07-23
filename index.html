@@ -20,14 +20,6 @@
     <link rel="stylesheet" href="index.css" />
   </head>
   <body class="text-white flex items-center justify-center min-h-screen p-4">
-    <!-- Main Heading at Top Right Corner -->
-    <h3
-      class="absolute right-8 text-4xl md:text-5xl font-bold tracking-widest text-white/90 z-30"
-      style="top: 4cm; text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6)"
-    >
-      Weather-cast
-    </h3>
-
     <!-- Video Background -->
     <div class="video-background">
       <video playsinline autoplay muted loop id="background-video">
@@ -228,6 +220,16 @@
         </div>
       </div>
     </div>
+
+    <!-- Footer Section -->
+    <footer class="absolute right-8 bottom-8 z-30">
+      <span
+        class="text-4xl md:text-5xl font-bold tracking-widest text-white/90"
+        style="text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6)"
+      >
+        Weather-cast
+      </span>
+    </footer>
 
     <!-- Custom JavaScript -->
     <script src="index.js"></script>
