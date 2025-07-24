@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
 
-    <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -16,213 +14,202 @@
       rel="stylesheet"
     />
 
-    <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="index.css" />
   </head>
-  <body class="text-white flex items-center justify-center min-h-screen p-4">
-    <!-- Video Background -->
+  <body class="text-white flex flex-col min-h-screen">
     <div class="video-background">
-      <video playsinline autoplay muted loop id="background-video">
-        <!-- Video sources will be set by JavaScript -->
-      </video>
+      <video playsinline autoplay muted loop id="background-video"></video>
       <div class="video-overlay"></div>
     </div>
 
-    <div
-      class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10"
-    >
-      <!-- Left Column -->
-      <div class="lg:col-span-1 flex flex-col gap-6">
-        <!-- Search Bar -->
-        <header class="w-full">
-          <div class="relative glass-card rounded-xl">
-            <input
-              type="text"
-              id="search-input"
-              placeholder="Search City..."
-              class="w-full bg-transparent text-white placeholder-slate-400 px-5 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 search-input"
-            />
-            <button
-              id="search-button"
-              class="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-white/20 transition-colors"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+    <main class="w-full max-w-7xl mx-auto p-4 flex-grow">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 relative z-10">
+        <div class="lg:col-span-1 flex flex-col gap-6">
+          <header class="w-full">
+            <div class="relative glass-card rounded-xl">
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search City..."
+                class="w-full bg-transparent text-white placeholder-slate-400 px-5 py-3 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 search-input"
+              />
+              <button
+                id="search-button"
+                class="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full hover:bg-white/20 transition-colors"
               >
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-              </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+              </button>
+            </div>
+          </header>
+
+          <section
+            id="current-weather"
+            class="glass-card rounded-xl p-6 flex flex-col justify-between h-64"
+          >
+            <div>
+              <h2 class="text-3xl font-bold" id="city-name">--</h2>
+              <p class="text-slate-300" id="weather-description">--</p>
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="flex items-center">
+                <img
+                  id="weather-icon"
+                  src="https://placehold.co/100x100/ffffff/333333?text=Icon"
+                  alt="Weather Icon"
+                  class="w-20 h-20 -ml-2"
+                />
+                <p class="text-6xl font-bold" id="temperature">--°C</p>
+              </div>
+              <div>
+                <p class="text-slate-300 text-sm" id="current-date">--</p>
+                <p class="text-slate-300 text-sm" id="current-time">--</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="glass-card rounded-xl p-6">
+            <h3 class="font-semibold mb-4">Coming 5 Days</h3>
+            <div id="forecast-5day" class="space-y-3">
+              <div class="text-center text-slate-400">Loading forecast...</div>
+            </div>
+          </section>
+        </div>
+
+        <div class="lg:col-span-2 flex flex-col gap-6">
+          <section>
+            <h3 class="font-semibold mb-4 text-lg">Today's Highlights</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div id="humidity" class="glass-card rounded-xl p-4 text-center">
+                <p class="text-slate-300 text-sm">Humidity</p>
+                <p class="text-2xl font-bold mt-2">-- %</p>
+              </div>
+              <div
+                id="wind-speed"
+                class="glass-card rounded-xl p-4 text-center"
+              >
+                <p class="text-slate-300 text-sm">Wind Speed</p>
+                <p class="text-2xl font-bold mt-2">-- m/s</p>
+              </div>
+              <div id="pressure" class="glass-card rounded-xl p-4 text-center">
+                <p class="text-slate-300 text-sm">Pressure</p>
+                <p class="text-2xl font-bold mt-2">-- hPa</p>
+              </div>
+              <div
+                id="visibility"
+                class="glass-card rounded-xl p-4 text-center"
+              >
+                <p class="text-slate-300 text-sm">Visibility</p>
+                <p class="text-2xl font-bold mt-2">-- km</p>
+              </div>
+            </div>
+          </section>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <section class="glass-card rounded-xl p-6">
+              <h3 class="font-semibold mb-4">Air Quality Index (AQI)</h3>
+              <div
+                id="aqi-data"
+                class="flex justify-around items-center h-full"
+              >
+                <div class="text-center text-slate-400">Loading AQI...</div>
+              </div>
+            </section>
+
+            <section class="glass-card rounded-xl p-6">
+              <h3 class="font-semibold mb-4">Sunrise & Sunset</h3>
+              <div class="flex justify-around items-center h-full">
+                <div class="text-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#facc15"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 2v8" />
+                    <path d="m4.93 4.93 1.41 1.41" />
+                    <path d="M2 12h2" />
+                    <path d="M20 12h2" />
+                    <path d="m19.07 4.93-1.41 1.41" />
+                    <path d="M12 18a6 6 0 0 0 6-6h-12a6 6 0 0 0 6 6z" />
+                    <path d="M22 22H2" />
+                  </svg>
+                  <p class="mt-2 text-slate-300">Sunrise</p>
+                  <p id="sunrise-time" class="font-bold text-xl">--:--</p>
+                </div>
+                <div class="text-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#94a3b8"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 18a6 6 0 0 0 6-6h-12a6 6 0 0 0 6 6z" />
+                    <path d="M22 22H2" />
+                    <path d="M15.23 15.23 17 17" />
+                    <path d="m17 7-1.77 1.77" />
+                    <path d="m9 17 1.77-1.77" />
+                    <path d="M7.23 8.77 9 7" />
+                  </svg>
+                  <p class="mt-2 text-slate-300">Sunset</p>
+                  <p id="sunset-time" class="font-bold text-xl">--:--</p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <section class="glass-card rounded-xl p-6">
+            <h3 class="font-semibold mb-4">Today</h3>
+            <div
+              id="forecast-hourly"
+              class="flex space-x-4 overflow-x-auto pb-4 custom-scrollbar"
+            >
+              <div class="text-center text-slate-400 w-full">
+                Loading hourly forecast...
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div
+          id="message-modal"
+          class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+        >
+          <div class="bg-slate-800 p-8 rounded-xl shadow-lg text-center">
+            <p id="message-text" class="text-lg mb-4"></p>
+            <button
+              id="close-modal-btn"
+              class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+            >
+              Close
             </button>
           </div>
-        </header>
-
-        <!-- Current Weather -->
-        <section
-          id="current-weather"
-          class="glass-card rounded-xl p-6 flex flex-col justify-between h-64"
-        >
-          <div>
-            <h2 class="text-3xl font-bold" id="city-name">--</h2>
-            <p class="text-slate-300" id="weather-description">--</p>
-          </div>
-          <div class="flex justify-between items-center">
-            <div class="flex items-center">
-              <img
-                id="weather-icon"
-                src="https://placehold.co/100x100/ffffff/333333?text=Icon"
-                alt="Weather Icon"
-                class="w-20 h-20 -ml-2"
-              />
-              <p class="text-6xl font-bold" id="temperature">--°C</p>
-            </div>
-            <div>
-              <p class="text-slate-300 text-sm" id="current-date">--</p>
-              <p class="text-slate-300 text-sm" id="current-time">--</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- 5-Day Forecast -->
-        <section class="glass-card rounded-xl p-6">
-          <h3 class="font-semibold mb-4">Coming 5 Days</h3>
-          <div id="forecast-5day" class="space-y-3">
-            <!-- Forecast items will be injected here by JS -->
-            <div class="text-center text-slate-400">Loading forecast...</div>
-          </div>
-        </section>
-      </div>
-
-      <!-- Right Column -->
-      <div class="lg:col-span-2 flex flex-col gap-6">
-        <!-- Highlights -->
-        <section>
-          <h3 class="font-semibold mb-4 text-lg">Today's Highlights</h3>
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div id="humidity" class="glass-card rounded-xl p-4 text-center">
-              <p class="text-slate-300 text-sm">Humidity</p>
-              <p class="text-2xl font-bold mt-2">-- %</p>
-            </div>
-            <div id="wind-speed" class="glass-card rounded-xl p-4 text-center">
-              <p class="text-slate-300 text-sm">Wind Speed</p>
-              <p class="text-2xl font-bold mt-2">-- m/s</p>
-            </div>
-            <div id="pressure" class="glass-card rounded-xl p-4 text-center">
-              <p class="text-slate-300 text-sm">Pressure</p>
-              <p class="text-2xl font-bold mt-2">-- hPa</p>
-            </div>
-            <div id="visibility" class="glass-card rounded-xl p-4 text-center">
-              <p class="text-slate-300 text-sm">Visibility</p>
-              <p class="text-2xl font-bold mt-2">-- km</p>
-            </div>
-          </div>
-        </section>
-
-        <!-- AQI and Sunrise/Sunset -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Air Quality Index -->
-          <section class="glass-card rounded-xl p-6">
-            <h3 class="font-semibold mb-4">Air Quality Index (AQI)</h3>
-            <div id="aqi-data" class="flex justify-around items-center h-full">
-              <!-- AQI items will be injected here -->
-              <div class="text-center text-slate-400">Loading AQI...</div>
-            </div>
-          </section>
-
-          <!-- Sunrise & Sunset -->
-          <section class="glass-card rounded-xl p-6">
-            <h3 class="font-semibold mb-4">Sunrise & Sunset</h3>
-            <div class="flex justify-around items-center h-full">
-              <div class="text-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#facc15"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M12 2v8" />
-                  <path d="m4.93 4.93 1.41 1.41" />
-                  <path d="M2 12h2" />
-                  <path d="M20 12h2" />
-                  <path d="m19.07 4.93-1.41 1.41" />
-                  <path d="M12 18a6 6 0 0 0 6-6h-12a6 6 0 0 0 6 6z" />
-                  <path d="M22 22H2" />
-                </svg>
-                <p class="mt-2 text-slate-300">Sunrise</p>
-                <p id="sunrise-time" class="font-bold text-xl">--:--</p>
-              </div>
-              <div class="text-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="48"
-                  height="48"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="#94a3b8"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M12 18a6 6 0 0 0 6-6h-12a6 6 0 0 0 6 6z" />
-                  <path d="M22 22H2" />
-                  <path d="M15.23 15.23 17 17" />
-                  <path d="m17 7-1.77 1.77" />
-                  <path d="m9 17 1.77-1.77" />
-                  <path d="M7.23 8.77 9 7" />
-                </svg>
-                <p class="mt-2 text-slate-300">Sunset</p>
-                <p id="sunset-time" class="font-bold text-xl">--:--</p>
-              </div>
-            </div>
-          </section>
-        </div>
-
-        <!-- Today's Hourly Forecast -->
-        <section class="glass-card rounded-xl p-6">
-          <h3 class="font-semibold mb-4">Today</h3>
-          <div
-            id="forecast-hourly"
-            class="flex space-x-4 overflow-x-auto pb-4 custom-scrollbar"
-          >
-            <!-- Hourly forecast items will be injected here -->
-            <div class="text-center text-slate-400 w-full">
-              Loading hourly forecast...
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <!-- Message/Error Modal -->
-      <div
-        id="message-modal"
-        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-      >
-        <div class="bg-slate-800 p-8 rounded-xl shadow-lg text-center">
-          <p id="message-text" class="text-lg mb-4"></p>
-          <button
-            id="close-modal-btn"
-            class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
-          >
-            Close
-          </button>
         </div>
       </div>
-    </div>
-
-    <!-- Footer Section -->
-    <footer class="absolute right-8 bottom-8 z-30">
+    </main>
+    <footer class="w-full text-center p-4 relative z-10">
       <span
         class="text-4xl md:text-5xl font-bold tracking-widest text-white/90"
         style="text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.6)"
@@ -231,7 +218,6 @@
       </span>
     </footer>
 
-    <!-- Custom JavaScript -->
     <script src="index.js"></script>
   </body>
 </html>
